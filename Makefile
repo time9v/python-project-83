@@ -1,10 +1,21 @@
 install:
 	poetry install
 
+build:
+	./build.sh
+
+publish:
+	poetry publish --dry-run
+
+test:
+	poetry run pytest
+
 
 dev:
-    poetry run flask --app page_analyzer:app run
+	poetry run flask --app page_analyzer:app run
 
+lint:
+	poetry run flake8 page_analyzer
 
 PORT ?= 8000
 start:
