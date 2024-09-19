@@ -19,7 +19,8 @@ app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'default_secret_key')
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    messages = get_flashed_messages()
+    return render_template('index.html', messages=messages)
 
 
 @app.get('/urls')
@@ -27,7 +28,7 @@ def get_urls():
     messages = get_flashed_messages()
     urls = show_urls_check()
     return render_template(
-        'show_urls.html',
+        'urls.html',
         messages=messages,
         urls=urls,
     )
@@ -59,7 +60,7 @@ def get_url(id):
     messages = get_flashed_messages(with_categories=True)
     checks = show_url(id)
     return render_template(
-        'show_url.html',
+        'url.html',
         url=url,
         messages=messages,
         checks=checks
